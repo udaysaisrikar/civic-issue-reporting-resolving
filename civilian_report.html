@@ -14,6 +14,69 @@
             font-size: 1.5rem;
             }
 
+            .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #222;
+            color: #fff;
+            padding: 1.2rem 1.2rem;
+            font-size: 1.3rem;
+            border-radius: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 99%;
+            margin-left: 5;
+            }
+
+            .navbar-left {
+            display: flex;
+            align-items: center;
+            }
+
+            .navbar-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-left: 1rem;
+            letter-spacing: 1px;
+            }
+
+            .navbar-toggle {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2.2rem;
+            cursor: pointer;
+            padding: 0.3rem 0.7rem;
+            }
+
+            .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            }
+
+            .navbar-icon {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.3rem 0.7rem;
+            }
+
+            .navbar-bottom {
+            position: fixed;
+            align-self: center;
+            bottom: 5px;;
+            width: 99%;
+            display: flex;
+            align-items: center;
+            padding: 0.7rem 0;
+            justify-content: space-around;
+            border-radius: 12px;
+            }
+
             .header {
             background: #222;
             color: #fff;
@@ -140,36 +203,25 @@
             cursor: pointer;
         }
 
+
         </style>
     </head>
     <body>
-        <div class="container-fluid header">
-            <div class="row align-items-center">
-      
-                <!-- Title -->
-                <div class="col-12 col-md-6">
-                    <h2>CivicReport</h2>
-                    <p>Location appears here...</p>
+        <!--top navigation bar-->
+        <nav class="navbar navbar-top mt-1">
+            <div class="navbar-left" style="flex-direction: column; align-items: flex-start;">
+                <div class="d-block">
+                    <span class="navbar-title">Civic Reports</span>
                 </div>
-
-                <!-- Notification -->
-                <div class="col-6 col-md-3 text-end">
-                    <div class="notification d-inline-block me-3">
-                        <i class="fas fa-bell bell"></i>
-                        <span class="badge">3</span>
-                    </div>
+                <div class="d-block">
+                    <span style="padding-left: 15px; font-size: 1.5rem;">location</span>
                 </div>
-
-                <!-- Profile -->
-                <div class="col-6 col-md-3 text-end">
-                    <div class="profile d-inline-flex">
-                        <i class="fas fa-user-circle"></i>
-                        <span>Profile</span>
-                    </div>
-                </div>
-
             </div>
-        </div>
+            <div class="navbar-right">
+                <button class="navbar-icon" aria-label="Notifications">&#128276;</button>
+                <button class="navbar-icon" aria-label="Profile">&#128100;</button>
+            </div>
+        </nav>
         
         <div class="container-fluid mt-4">
             <div class="quick-report">
@@ -224,18 +276,24 @@
         </div>
 
         <nav>
+            <a href="civilian_report.html" style="text-decoration: none;">
             <button>
                 <i class="fas fa-camera me-2"></i>
                 Report
             </button>
+        </a>
+        <a href="civilian_tracking.html" style="text-decoration: none;">
             <button>
                 <i class="fas fa-route me-2"></i>
                 Track
             </button>
+        </a>
+        <a href="#" style="text-decoration: none;">
             <button>
                 <i class="fas fa-map me-2"></i>
                 Map
             </button>
+        </a> 
         </nav>
       <script>
         const photoOption = document.getElementById('photoOption');

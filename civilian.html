@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Civilian Page</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
         <style>
@@ -13,6 +13,69 @@
         background: #f9fafb;
         min-height: 100vh;
         font-size: 1.5rem;
+        }
+
+        .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #222;
+        color: #fff;
+        padding: 1.2rem 1.2rem;
+        font-size: 1.3rem;
+        border-radius: 12px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 99%;
+        margin-left: 5;
+        }
+
+        .navbar-left {
+        display: flex;
+        align-items: center;
+        }
+
+        .navbar-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-left: 1rem;
+        letter-spacing: 1px;
+        }
+
+        .navbar-toggle {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 2.2rem;
+        cursor: pointer;
+        padding: 0.3rem 0.7rem;
+        }
+
+        .navbar-right {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        }
+
+        .navbar-icon {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0.3rem 0.7rem;
+        }
+
+        .navbar-bottom {
+        position: fixed;
+        align-self: center;
+        bottom: 5px;;
+        width: 99%;
+        display: flex;
+        align-items: center;
+        padding: 0.7rem 0;
+        justify-content: space-around;
+        border-radius: 12px;
         }
         
         .header {
@@ -92,73 +155,78 @@
         }
 
         nav {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: #222;
-        color: #fff;
-        border-top: 1px solid #e5e7eb;
-        display: flex;
-        justify-content: space-around;
-        padding: 0.5rem 0;
-        font-size: 1.3rem;
-        border-radius: 12px;
-        margin-left: auto;
-        margin-right: auto;
-        width: 99%;
-        margin-left: 5;
-        }
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #222;
+            color: #fff;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5rem 0;
+            font-size: 1.3rem;
+            border-radius: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 99%;
+            margin-left: 5;
+            }
 
 
-        nav button {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 1.5rem;
-        color: #ffffff;
-        background: none;
-        border: none;
-        cursor: pointer;
-        }
+            nav button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1.5rem;
+            color: #ffffff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            }
 
-        .division {
-        padding: 2rem;
-        margin-left: auto;
-        margin-right: auto;
-        }
+            .division {
+            padding: 2rem;
+            padding-bottom: 5rem; /* Prevents content from being hidden behind navbar-bottom */
+            margin-left: auto;
+            margin-right: auto;
+            }
 
+            .analytics-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .statistic {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #007bff;
+            }
         </style>
 
     </head>
     <body>
-        <div class="container-fluid header">
-            <div class="row align-items-center">
-      
-                <!-- Title -->
-                <div class="col-12 col-md-6">
-                    <h2>CivicReport</h2>
-                    <p>Location appears here...</p>
+        <!--top navigation bar-->
+        <nav class="navbar navbar-top mt-1">
+            <div class="navbar-left" style="flex-direction: column; align-items: flex-start;">
+                <div class="d-block">
+                    <span class="navbar-title">Civic Reports</span>
                 </div>
-
-                <!-- Notification -->
-                <div class="col-6 col-md-3 text-end">
-                    <div class="notification d-inline-block me-3">
-                        <i class="fas fa-bell bell"></i>
-                        <span class="badge">3</span>
-                    </div>
+                <div class="d-block">
+                    <span style="padding-left: 15px; font-size: 1.5rem;">location</span>
                 </div>
-
-                <!-- Profile -->
-                <div class="col-6 col-md-3 text-end">
-                    <div class="profile d-inline-flex">
-                        <i class="fas fa-user-circle"></i>
-                        <span>Profile</span>
-                    </div>
-                </div>
-
             </div>
-        </div>
+            <div class="navbar-right">
+                <button class="navbar-icon" aria-label="Notifications">&#128276;</button>
+                <button class="navbar-icon" aria-label="Profile">&#128100;</button>
+            </div>
+        </nav>
 
         <!-- Quick Report -->
         <div class="container-fluid mt-4" >
@@ -169,11 +237,46 @@
             </div>
         </div>
 
+        <!--analytics-->
+        <div class="container-fluid mt-4 division">
+            <div class="row mb-4">
+                <h1>Civilian Analytics</h1>
+            </div>
+            <div class="row" style="justify-content: space-around;">
+                <div class="col-md-5 analytics-card">
+                    <span>
+                        <span class="statistic">3</span>
+                        <br>Pending
+                    </span>
+                </div>
+                <div class="col-md-5 analytics-card">
+                    <span>
+                        <span class="statistic">3</span>
+                        <br>Completed
+                    </span>
+                </div>
+            </div>
+            <div class="row" style="justify-content: space-around;">
+                <div class="col-md-5 analytics-card">
+                    <span>
+                        <span class="statistic">5</span>
+                        <br>In Progress
+                    </span>
+                </div>
+                <div class="col-md-5 analytics-card">
+                    <span>
+                        <span class="statistic">11</span>
+                        <br>Total 
+                    </span>
+                </div>
+            </div>
+        </div>
         <!-- Recent Activities-->
         <div class="container-fluid mt-4">
-            <div class="recent-activities text-center">
-                <h1>Recent Activity in Your Area</h1>
-
+                <div class="row mb-4 heading">
+                    <h1>Recent Activity in Your Area</h1>
+                </div>
+                
                 <!--top few issues-->
                 <div class="container-fluid  division">
                     <div class="issue">
@@ -244,121 +347,36 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="issue">
-                        <div style="background-image: url('assets/sample.jpg'); background-size: cover; height: 200px; border-radius: 12px;">
-                            <div style="background: rgba(0, 0, 0, 0.5); color: #fff; padding: 1rem; border-radius: 12px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end;">
-                                <h2>Department of Transportation</h2>
-                                <p>Location: City Center</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8 d-flex align-items-center">
-                                <p class="mt-2">
-                                    <span>There is a large pothole in the middle of the main road causing traffic jams.</span>
-                                    <span>Several vehicles have already been damaged due to the uneven surface.</span>
-                                    <span>Immediate repair is needed to ensure safety for commuters.</span>
-                                </p>
-                            </div>
-                            <div class="col-4 d-flex justify-content-end align-items-center">
-                                <button class="btn btn-warning" >
-                                    In Progress
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="issue">
-                        <div style="background-image: url('assets/sample.jpg'); background-size: cover; height: 200px; border-radius: 12px;">
-                            <div style="background: rgba(0, 0, 0, 0.5); color: #fff; padding: 1rem; border-radius: 12px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end;">
-                                <h2>Department of Transportation</h2>
-                                <p>Location: City Center</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8 d-flex align-items-center">
-                                <p class="mt-2">
-                                    <span>There is a large pothole in the middle of the main road causing traffic jams.</span>
-                                    <span>Several vehicles have already been damaged due to the uneven surface.</span>
-                                    <span>Immediate repair is needed to ensure safety for commuters.</span>
-                                </p>
-                            </div>
-                            <div class="col-4 d-flex justify-content-end align-items-center">
-                                <button class="btn btn-warning" >
-                                    In Progress
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="issue">
-                        <div style="background-image: url('assets/sample.jpg'); background-size: cover; height: 200px; border-radius: 12px;">
-                            <div style="background: rgba(0, 0, 0, 0.5); color: #fff; padding: 1rem; border-radius: 12px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end;">
-                                <h2>Department of Transportation</h2>
-                                <p>Location: City Center</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8 d-flex align-items-center">
-                                <p class="mt-2">
-                                    <span>There is a large pothole in the middle of the main road causing traffic jams.</span>
-                                    <span>Several vehicles have already been damaged due to the uneven surface.</span>
-                                    <span>Immediate repair is needed to ensure safety for commuters.</span>
-                                </p>
-                            </div>
-                            <div class="col-4 d-flex justify-content-end align-items-center">
-                                <button class="btn btn-warning" >
-                                    In Progress
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="issue">
-                        <div style="background-image: url('assets/sample.jpg'); background-size: cover; height: 200px; border-radius: 12px;">
-                            <div style="background: rgba(0, 0, 0, 0.5); color: #fff; padding: 1rem; border-radius: 12px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end;">
-                                <h2>Department of Transportation</h2>
-                                <p>Location: City Center</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8 d-flex align-items-center">
-                                <p class="mt-2">
-                                    <span>There is a large pothole in the middle of the main road causing traffic jams.</span>
-                                    <span>Several vehicles have already been damaged due to the uneven surface.</span>
-                                    <span>Immediate repair is needed to ensure safety for commuters.</span>
-                                </p>
-                            </div>
-                            <div class="col-4 d-flex justify-content-end align-items-center">
-                                <button class="btn btn-warning" >
-                                    In Progress
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-
-
                 </div>
 
-            </div>
         </div>
 
-    
 
-        <nav>
+
+    <!--bottom navigation bar-->
+    
+    <nav>
+        <a href="civilian_report.html" style="text-decoration: none;">
             <button>
                 <i class="fas fa-camera me-2"></i>
                 Report
             </button>
+        </a>
+        <a href="civilian_tracking.html" style="text-decoration: none;">
             <button>
                 <i class="fas fa-route me-2"></i>
                 Track
             </button>
+        </a>
+        <a href="#" style="text-decoration: none;">
             <button>
                 <i class="fas fa-map me-2"></i>
                 Map
             </button>
-        </nav>
+        </a> 
+            
+    </nav>
+
+    
     </body>
 </html>
