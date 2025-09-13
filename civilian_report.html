@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Civilian Report</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <style>
+            body {
+            font-family: Arial, sans-serif;
+            background: #f9fafb;
+            min-height: 100vh;
+            font-size: 1.5rem;
+            }
+
+            .header {
+            background: #2563eb;
+            color: #ffffff;
+            padding: 10px 15px;
+            }
+
+            .header h2 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: bold;
+            }
+
+            .location p {
+            margin: 0;
+            color: #e0e7ff;
+            }
+
+            .notification {
+            position: relative;
+            cursor: pointer;
+            }
+
+            .notification .bell {
+            font-size: 1.6rem;
+            }
+
+            .badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: red;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 50%;
+            }
+
+            .profile {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            }
+
+            .quick-report {
+            padding: 1.5rem;
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            }
+
+            .record-btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            }
+
+            .record-btn.recording {
+            background: red;
+            }
+
+            nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5rem 0;
+            }
+
+
+            nav button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1.5rem;
+            color: #6b7280;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid header">
+            <div class="row align-items-center">
+      
+                <!-- Title -->
+                <div class="col-12 col-md-6">
+                    <h2>CivicReport</h2>
+                    <p>Location appears here...</p>
+                </div>
+
+                <!-- Notification -->
+                <div class="col-6 col-md-3 text-end">
+                    <div class="notification d-inline-block me-3">
+                        <i class="fas fa-bell bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                </div>
+
+                <!-- Profile -->
+                <div class="col-6 col-md-3 text-end">
+                    <div class="profile d-inline-flex">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Profile</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="container-fluid mt-4">
+            <div class="quick-report">
+                <h4 class="text-center mb-3"><i class="fas fa-clipboard me-2"></i>Report the Issue</h4>
+                <form>
+                    
+                    <!-- Image Upload -->
+                    <div class="mb-3">
+                        <label class="form-label"><i class="fas fa-camera me-2"></i> Upload Image</label>
+                        <input type="file" class="form-control" accept="image/*">
+                    </div>
+
+                    <!-- Text Input -->
+                    <div class="mb-3">
+                        <label class="form-label"><i class="fas fa-pen me-2"></i> Add Description</label>
+                        <textarea class="form-control" rows="3" placeholder="Describe the issue..."></textarea>
+                    </div>
+
+                    <!-- Voice Recording -->
+                    <div class="mb-3">
+                        <label class="form-label"><i class="fas fa-microphone me-2"></i> Record Voice</label><br>
+                        <button type="button" id="recordBtn" class="record-btn">
+                            <i class="fas fa-microphone"></i> Start Recording
+                        </button>
+                        <audio id="audioPlayback" controls class="mt-2 d-none"></audio>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane me-2"></i> Submit Report
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <nav>
+            <button>
+                <i class="fas fa-camera me-2"></i>
+                Report
+            </button>
+            <button>
+                <i class="fas fa-route me-2"></i>
+                Track
+            </button>
+            <button>
+                <i class="fas fa-map me-2"></i>
+                Map
+            </button>
+        </nav>
+    </body>
+</html>

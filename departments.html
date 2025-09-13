@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departments Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+
+        .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #222;
+        color: #fff;
+        padding: 1.2rem 1.2rem;
+        font-size: 1.3rem;
+        border-radius: 12px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 99%;
+        margin-left: 5;
+        }
+
+        .navbar-left {
+        display: flex;
+        align-items: center;
+        }
+
+        .navbar-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-left: 1rem;
+        letter-spacing: 1px;
+        }
+
+        .navbar-toggle {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 2.2rem;
+        cursor: pointer;
+        padding: 0.3rem 0.7rem;
+        }
+
+        .navbar-right {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        }
+
+        .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .progress {
+      height: 8px;
+      border-radius: 4px;
+    }
+    .capacity-status {
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+    .status-high { background: #fde68a; color: #92400e; }
+    .status-available { background: #bbf7d0; color: #166534; }
+    </style>
+</head>
+<body>
+    <!--top navigation bar-->
+    <nav class="navbar navbar-top mt-1">
+        <div class="navbar-left" style="flex-direction: column; align-items: flex-start;">
+            <div class="d-block">
+                <span class="navbar-title">Civic Reports</span>
+            </div>
+            <div class="d-block">
+                <span style="padding-left: 15px; font-size: 1.5rem;">location</span>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <button class="navbar-icon" aria-label="Notifications">&#128276;</button>
+            <button class="navbar-icon" aria-label="Profile">&#128100;</button>
+        </div>
+    </nav>
+    <!--main content-->
+
+    <div class="container-fluid division">
+        <div class="row mb-4 heading">
+            <h4 class="fw-bold" style="padding-top: 20px;">Department Routing</h4>
+             <p class="text-muted">Automated issue assignment and department workload management</p>
+        </div>
+        <div class="row g-3">
+
+    <!-- Public Works Card -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card p-3">
+            <h6 class="fw-bold">Public Works <span class="float-end text-warning">75% Load</span></h6>
+            <p class="text-muted small">Roads, sidewalks, infrastructure maintenance</p>
+    
+            <!-- Default content -->
+            <div class="progress mb-2">
+                <div class="progress-bar bg-warning" style="width: 75%;"></div>
+            </div>
+            <p class="small mb-1">Current Workload: 75%</p>
+            <p><strong>1</strong> Total | <strong>1</strong> Active | <strong>0</strong> Resolved</p>
+    
+            <!-- Collapsible extra content -->
+            <div class="collapse" id="publicWorksExtra">
+                <p class="small mb-1">Avg Response: 24h</p>
+                <p class="small">Handles: 
+                    <span class="badge bg-light text-dark">Roads & Potholes</span> 
+                    <span class="badge bg-light text-dark">Sidewalks</span> 
+                    <span class="badge bg-light text-dark">Infrastructure</span>
+                </p>
+                <p class="small mb-1"><strong>Department Head:</strong> John Martinez</p>
+                <p class="small mb-2">📞 (555) 123-4567 | 📧 publicworks@city.gov</p>
+                <span class="capacity-status status-high">High Load</span>
+            </div>
+
+            <!-- View More / Less Button -->
+            <button class="btn btn-sm btn-outline-primary mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#publicWorksExtra" aria-expanded="false" aria-controls="publicWorksExtra">
+                View More
+            </button>
+        </div>
+    </div>
+
+    <!-- Sanitation Department -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card p-3">
+            <h6 class="fw-bold">Sanitation Department <span class="float-end text-warning">60% Load</span></h6>
+            <p class="text-muted small">Waste management, recycling, street cleaning</p>
+    
+            <!-- Default content -->
+            <div class="progress mb-2">
+                <div class="progress-bar bg-warning" style="width: 60%;"></div>
+            </div>
+            <p class="small mb-1">Current Workload: 60%</p>
+            <p><strong>1</strong>Total | <strong>0</strong> Active | <strong>1</strong> Resolved</p>
+    
+            <!-- Collapsible extra content -->
+            <div class="collapse" id="sanitationWorksExtra">
+                <p class="small mb-1">Avg Response: 12h</p>
+                <p class="small">Handles: <span class="badge bg-light text-dark">Waste Management</span> <span class="badge bg-light text-dark">Street Cleaning</span></p>
+                <p class="small mb-1"><strong>Department Head:</strong> Sarah Chen</p>
+                <p class="small mb-2">📞 (555) 234-5678 | 📧 sanitation@city.gov</p>
+                <span class="capacity-status status-high">High Load</span>
+            </div>
+
+            <!-- View More / Less Button -->
+            <button class="btn btn-sm btn-outline-primary mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#sanitationWorksExtra" aria-expanded="false" aria-controls="publicWorksExtra">
+                View More
+            </button>
+        </div>
+    </div>
+    <!-- Electrical Services -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card p-3">
+            <h6 class="fw-bold">Electrical Services <span class="float-end text-success">45% Load</span></h6>
+            <p class="text-muted small">Street lighting, traffic signals, electrical infrastructure</p>
+
+            <!-- Default content -->
+            <div class="progress mb-2">
+                <div class="progress-bar bg-success" style="width: 45%;"></div>
+            </div>
+            <p class="small mb-1">Current Workload: 45%</p>
+            <p><strong>1</strong> Total | <strong>0</strong> Active | <strong>0</strong> Resolved</p>
+            
+            <!-- Collapsible extra content -->
+            <div class="collapse" id="electricalServicesExtra">
+                <p class="small mb-1">Avg Response: 18h</p>
+                <p class="small">Handles: <span class="badge bg-light text-dark">Streetlights</span> <span class="badge bg-light text-dark">Traffic Signals</span></p>
+                <p class="small mb-1"><strong>Department Head:</strong> Mike Rodriguez</p>
+                <p class="small mb-2">📞 (555) 345-6789 | 📧 electrical@city.gov</p>
+                <span class="capacity-status status-available">Available</span>
+            </div>
+            
+            <!-- View More / Less Button -->
+            <button class="btn btn-sm btn-outline-primary mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#electricalServicesExtra" aria-expanded="false" aria-controls="publicWorksExtra">
+                View More
+            </button>
+      </div>
+    </div>
+
+    <!-- Parks Department -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card p-3">
+            <h6 class="fw-bold">Parks Department <span class="float-end text-success">30% Load</span></h6>
+            <p class="text-muted small">Parks maintenance, recreation facilities, green spaces</p>
+
+            <!-- Default content -->
+            <div class="progress mb-2">
+                <div class="progress-bar bg-success" style="width: 30%;"></div>
+            </div>
+            <p class="small mb-1">Current Workload: 30%</p>
+            <p><strong>0</strong> Total | <strong>0</strong> Active | <strong>0</strong> Resolved</p>
+
+            <!-- Collapsible extra content -->
+            <div class="collapse" id="parkServicesExtra">
+                <p class="small mb-1">Avg Response: -</p>
+                <span class="capacity-status status-available">Available</span>
+            </div>
+            
+            <!-- View More / Less Button -->
+            <button class="btn btn-sm btn-outline-primary mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#parkServicesExtra" aria-expanded="false" aria-controls="publicWorksExtra">
+                View More
+            </button>
+      </div>
+    </div>
+
+    <!-- Water Department -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card p-3">
+            <h6 class="fw-bold">Water Department <span class="float-end text-danger">85% Load</span></h6>
+            <p class="text-muted small">Water supply, sewage systems, drainage</p>
+
+            <!-- Default content -->
+            <div class="progress mb-2">
+                <div class="progress-bar bg-danger" style="width: 85%;"></div>
+            </div>
+            <p class="small mb-1">Current Workload: 85%</p>
+            <p><strong>0</strong> Total | <strong>0</strong> Active | <strong>0</strong> Resolved</p>
+
+            <!-- Collapsible extra content -->
+            <div class="collapse" id="waterServicesExtra">
+                <p class="small mb-1">Avg Response: -</p>
+                <span class="capacity-status status-high">High Load</span>
+            </div>
+
+            <!-- View More / Less Button -->
+            <button class="btn btn-sm btn-outline-primary mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#waterServicesExtra" aria-expanded="false" aria-controls="publicWorksExtra">
+                View More
+            </button>
+        </div>
+    </div>
+
+    </div>
+    <!--bottom navigation bar-->
+    <nav class="navbar navbar-bottom">
+        <button class="navbar-icon" aria-label="Home" style="font-size: 2rem;">
+            &#8962;<br>
+            <span style="font-size: 0.9rem; display: block;">Home</span>
+        </button>
+        <button class="navbar-icon" aria-label="Tracking" style="font-size: 2rem;">
+            &#128205;<br>
+            <span style="font-size: 0.9rem; display: block;">Tracking</span>
+        </button>
+        <button class="navbar-icon" aria-label="Departments" style="font-size: 2rem;">
+            &#128736;<br>
+            <span style="font-size: 0.9rem; display: block;">Departments</span>
+        </button>
+    </nav>
+
+    <script>
+        document.querySelectorAll('.btn[data-bs-toggle="collapse"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+            const target = document.querySelector(btn.getAttribute('data-bs-target'));
+            btn.textContent = target.classList.contains('show') ? 'View More' : 'View Less';
+        });
+    });
+</script>
+</body>
+</html>
