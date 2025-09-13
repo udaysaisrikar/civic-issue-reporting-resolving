@@ -112,22 +112,5 @@
             <span style="font-size: 0.9rem; display: block;">Map</span>
         </button>
     </nav>
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var statusSelect = document.getElementById('statusSelect1');
-        statusSelect.addEventListener('change', function () {
-            if (this.value === 'resolved') {
-                var modal = new bootstrap.Modal(document.getElementById('imageUploadModal'));
-                modal.show();
-            }
-            if (this.value === 'inprogress') {
-                var modal = new bootstrap.Modal(document.getElementById('assignWorkerModal'));
-                modal.show();
-            }
-        });
-    });
-</script>
 </body>
 </html>
