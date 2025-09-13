@@ -303,36 +303,106 @@
 
         // Handle dropdown change
         photoOption.addEventListener('change', (e) => {
-        if (e.target.value === "upload") {
-        uploadInput.style.display = "block";
-        cameraInput.style.display = "none";
-        preview.style.display = "none";
-      } else if (e.target.value === "capture") {
-        uploadInput.style.display = "none";
-        cameraInput.style.display = "block";
-        preview.style.display = "none";
-      } else {
-        uploadInput.style.display = "none";
-        cameraInput.style.display = "none";
-        preview.style.display = "none";
-      }
-    });
+            if (e.target.value === "upload") {
+                uploadInput.style.display = "block";
+                cameraInput.style.display = "none";
+                preview.style.display = "none";
+            } else if (e.target.value === "capture") {
+                uploadInput.style.display = "none";
+                cameraInput.style.display = "block";
+                preview.style.display = "none";
+            } else {
+                uploadInput.style.display = "none";
+                cameraInput.style.display = "none";
+                preview.style.display = "none";
+            }
+        });
 
-    // Show preview after selecting/capturing
-    function showPreview(input) {
-      const file = input.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          preview.src = e.target.result;
-          preview.style.display = "block";
-        };
-        reader.readAsDataURL(file);
-      }
-    }
+        // Show preview after selecting/capturing
+        function showPreview(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        }
 
-    uploadInput.addEventListener('change', () => showPreview(uploadInput));
-    cameraInput.addEventListener('change', () => showPreview(cameraInput));
+        uploadInput.addEventListener('change', () => showPreview(uploadInput));
+        cameraInput.addEventListener('change', () => showPreview(cameraInput));
+
+        // Voice recording logic
+            const recordBtn = document.getElementById('recordBtn');
+            const audioPlayback = document.getElementById('audioPlayback');
+            let mediaRecorder;
+            let audioChunks = [];
+            let isRecording = false;
+            let stream;
+
+            async function startRecording() {
+                        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                            alert('Your browser does not support audio recording.');
+                            return;
+                        }
+                        try {
+                            stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                            // ...existing code...
+                            let mimeType = '';
+                            if (MediaRecorder.isTypeSupported('audio/mp4')) {
+                                mimeType = 'audio/mp4';
+                            } else if (MediaRecorder.isTypeSupported('audio/webm')) {
+                                mimeType = 'audio/webm';
+                            } else {
+                                mimeType = '';
+                            }
+                            mediaRecorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
+                            audioChunks = [];
+                            mediaRecorder.ondataavailable = (e) => {
+                                if (e.data.size > 0) audioChunks.push(e.data);
+                            };
+                            mediaRecorder.onstop = () => {
+                                const audioBlob = new Blob(audioChunks, { type: mimeType || 'audio/webm' });
+                                audioPlayback.src = URL.createObjectURL(audioBlob);
+                                audioPlayback.classList.remove('d-none');
+                                audioPlayback.load();
+                                if (stream) {
+                                    stream.getTracks().forEach(track => track.stop());
+                                }
+                            };
+                            mediaRecorder.start();
+                            isRecording = true;
+                            recordBtn.classList.add('recording');
+                            recordBtn.innerHTML = '<i class="fas fa-stop"></i> Stop Recording';
+                        } catch (err) {
+                            if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+                                alert('Microphone access was denied. Please allow microphone access in your browser settings. On mobile, check site permissions and reload the page after allowing.');
+                            } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+                                alert('No microphone was found. Please connect a microphone and try again.');
+                            } else {
+                                alert('Error accessing microphone: ' + err.message);
+                            }
+                        }
+            }
+
+            function stopRecording() {
+                if (mediaRecorder && isRecording) {
+                    mediaRecorder.stop();
+                    isRecording = false;
+                    recordBtn.classList.remove('recording');
+                    recordBtn.innerHTML = '<i class="fas fa-microphone"></i> Start Recording';
+                }
+            }
+
+            recordBtn.addEventListener('click', () => {
+                if (!isRecording) {
+                    startRecording();
+                } else {
+                    stopRecording();
+                }
+            });
   </script>
     </body>
 </html>
