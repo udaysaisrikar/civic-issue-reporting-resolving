@@ -15,9 +15,15 @@
             }
 
             .header {
-            background: #2563eb;
-            color: #ffffff;
+            background: #222;
+            color: #fff;
             padding: 10px 15px;
+            font-size: 1.3rem;
+            border-radius: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 99%;
+            margin-left: 5;
             }
 
             .header h2 {
@@ -69,6 +75,27 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             }
 
+
+            canvas, img.preview {
+            width: 320px;
+            height: 240px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            margin: 10px;
+            display: none;
+            }
+
+            button, select {
+            margin: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            }
+
             .record-btn {
             border: none;
             background: #2563eb;
@@ -87,11 +114,18 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: #fff;
+            background: #222;
+            color: #fff;
             border-top: 1px solid #e5e7eb;
             display: flex;
             justify-content: space-around;
             padding: 0.5rem 0;
+            font-size: 1.3rem;
+            border-radius: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 99%;
+            margin-left: 5;
             }
 
 
@@ -100,7 +134,7 @@
             flex-direction: column;
             align-items: center;
             font-size: 1.5rem;
-            color: #6b7280;
+            color: #ffffff;
             background: none;
             border: none;
             cursor: pointer;
@@ -144,15 +178,30 @@
                     
                     <!-- Image Upload -->
                     <div class="mb-3">
-                        <label class="form-label"><i class="fas fa-camera me-2"></i> Upload Image</label>
-                        <input type="file" class="form-control" accept="image/*">
+                         
+                         <!-- Option selector -->
+                        <select id="photoOption" class="form-select">
+                            <option value="">-- Select Option --</option>
+                            <option value="upload">Upload from Device</option>
+                            <option value="capture">Capture Live Photo</option>
+                        </select>
+                        <!-- Upload input -->
+                        <input type="file" id="uploadInput" accept="image/*" style="display:none;">
+
+                        <!-- Direct capture input (for mobile camera) -->
+                        <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;">
+
+                        <!-- Preview -->
+                        <img id="preview" class="preview" alt="Preview">
                     </div>
+                    <br>
 
                     <!-- Text Input -->
                     <div class="mb-3">
                         <label class="form-label"><i class="fas fa-pen me-2"></i> Add Description</label>
                         <textarea class="form-control" rows="3" placeholder="Describe the issue..."></textarea>
                     </div>
+                    <br>
 
                     <!-- Voice Recording -->
                     <div class="mb-3">
@@ -162,6 +211,7 @@
                         </button>
                         <audio id="audioPlayback" controls class="mt-2 d-none"></audio>
                     </div>
+                    <br>
 
                     <!-- Submit -->
                     <div class="text-center">
@@ -187,5 +237,44 @@
                 Map
             </button>
         </nav>
+      <script>
+        const photoOption = document.getElementById('photoOption');
+        const uploadInput = document.getElementById('uploadInput');
+        const cameraInput = document.getElementById('cameraInput');
+        const preview = document.getElementById('preview');
+
+        // Handle dropdown change
+        photoOption.addEventListener('change', (e) => {
+        if (e.target.value === "upload") {
+        uploadInput.style.display = "block";
+        cameraInput.style.display = "none";
+        preview.style.display = "none";
+      } else if (e.target.value === "capture") {
+        uploadInput.style.display = "none";
+        cameraInput.style.display = "block";
+        preview.style.display = "none";
+      } else {
+        uploadInput.style.display = "none";
+        cameraInput.style.display = "none";
+        preview.style.display = "none";
+      }
+    });
+
+    // Show preview after selecting/capturing
+    function showPreview(input) {
+      const file = input.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          preview.src = e.target.result;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    uploadInput.addEventListener('change', () => showPreview(uploadInput));
+    cameraInput.addEventListener('change', () => showPreview(cameraInput));
+  </script>
     </body>
 </html>
