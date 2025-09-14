@@ -21,6 +21,12 @@
       color: #0d6efd;
       text-decoration: underline;
     }
+    #deptIdField, #muniIdField {
+      display: none; /* hidden by default */
+    }
+    #phoneField {
+      display: none; /* shown only for Civilian & Municipality signup */
+    }
   </style>
 </head>
 <body class="d-flex align-items-center justify-content-center vh-100">
@@ -44,6 +50,16 @@
 
           <!-- Sign In Form -->
           <form id="signinForm">
+            <!-- Department ID (for Department login) -->
+            <div class="mb-3" id="deptIdField">
+              <label for="deptId" class="form-label">Department ID</label>
+              <input type="text" class="form-control" id="deptId" placeholder="Enter Department ID">
+            </div>
+            <!-- Municipality ID (for Municipality login) -->
+            <div class="mb-3" id="muniIdField">
+              <label for="muniId" class="form-label">Municipality / Panchayat ID</label>
+              <input type="text" class="form-control" id="muniId" placeholder="Enter Municipality ID/Panchayat ID">
+            </div>
             <div class="mb-3">
               <label for="signinEmail" class="form-label">Email</label>
               <input type="email" class="form-control" id="signinEmail" required>
@@ -64,6 +80,11 @@
             <div class="mb-3">
               <label for="signupEmail" class="form-label">Email</label>
               <input type="email" class="form-control" id="signupEmail" required>
+            </div>
+            <!-- Phone number (Civilian + Municipality only) -->
+            <div class="mb-3" id="phoneField">
+              <label for="signupPhone" class="form-label">Phone Number</label>
+              <input type="tel" class="form-control" id="signupPhone" pattern="[0-9]{10}" placeholder="Enter 10-digit phone number">
             </div>
             <div class="mb-3">
               <label for="signupPassword" class="form-label">Password</label>
@@ -91,17 +112,76 @@
     const signupForm = document.getElementById("signupForm");
     const toSignup = document.getElementById("toSignup");
     const toSignin = document.getElementById("toSignin");
+    const roleSelect = document.getElementById("role");
 
+    const deptIdField = document.getElementById("deptIdField");
+    const muniIdField = document.getElementById("muniIdField");
+    const phoneField = document.getElementById("phoneField");
+
+    // Handle role selection
+    roleSelect.addEventListener("change", () => {
+      if (roleSelect.value === "department") {
+        // Department: show dept ID, only signin
+        deptIdField.style.display = "block";
+        muniIdField.style.display = "none";
+        phoneField.style.display = "none";
+
+        signupForm.style.display = "none";
+        signinForm.style.display = "block";
+        toSignup.style.display = "none";
+        toSignin.style.display = "none";
+      } 
+      else if (roleSelect.value === "municipality") {
+        // Municipality: show muni ID at signin, phone at signup
+        deptIdField.style.display = "none";
+        muniIdField.style.display = "block";
+        phoneField.style.display = "none"; // only shown in signup
+
+        signinForm.style.display = "block";
+        signupForm.style.display = "none";
+        toSignup.style.display = "inline";
+        toSignin.style.display = "none";
+      } 
+      else if (roleSelect.value === "civilian") {
+        // Civilian: normal login, phone in signup
+        deptIdField.style.display = "none";
+        muniIdField.style.display = "none";
+        phoneField.style.display = "none"; // only in signup
+
+        signinForm.style.display = "block";
+        signupForm.style.display = "none";
+        toSignup.style.display = "inline";
+        toSignin.style.display = "none";
+      } 
+      else {
+        // Nothing selected
+        deptIdField.style.display = "none";
+        muniIdField.style.display = "none";
+        phoneField.style.display = "none";
+      }
+    });
+
+    // Switch to signup
     toSignup.addEventListener("click", () => {
       signinForm.style.display = "none";
       signupForm.style.display = "block";
+
+      // Show phone field for Civilian/Municipality signup
+      if (roleSelect.value === "civilian" || roleSelect.value === "municipality") {
+        phoneField.style.display = "block";
+      } else {
+        phoneField.style.display = "none";
+      }
+
       toSignup.style.display = "none";
       toSignin.style.display = "inline";
     });
 
+    // Switch back to signin
     toSignin.addEventListener("click", () => {
       signinForm.style.display = "block";
       signupForm.style.display = "none";
+      phoneField.style.display = "none";
       toSignup.style.display = "inline";
       toSignin.style.display = "none";
     });
@@ -109,14 +189,28 @@
     // Example submit handling (replace with backend integration)
     signinForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const role = document.getElementById("role").value;
-      alert("Signed in as " + role);
+      const role = roleSelect.value;
+      let message = "Signed in as " + role;
+      if (role === "department") {
+        const deptId = document.getElementById("deptId").value;
+        message += " (Dept ID: " + deptId + ")";
+      }
+      if (role === "municipality") {
+        const muniId = document.getElementById("muniId").value;
+        message += " (Municipality ID: " + muniId + ")";
+      }
+      alert(message);
     });
 
     signupForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const role = document.getElementById("role").value;
-      alert("Signed up as " + role);
+      const role = roleSelect.value;
+      let message = "Signed up as " + role;
+      if (role === "civilian" || role === "municipality") {
+        const phone = document.getElementById("signupPhone").value;
+        message += " (Phone: " + phone + ")";
+      }
+      alert(message);
     });
   </script>
 </body>
