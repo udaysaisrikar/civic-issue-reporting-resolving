@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Civilian Report</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f9fafb;
+        min-height: 100vh;
+        font-size: 1.5rem;
+      }
+
+      .header {
+        background: #222;
+        color: #fff;
+        padding: 10px 15px;
+        font-size: 1.3rem;
+        border-radius: 12px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 99%;
+        margin-left: 5;
+      }
+
+      .header h2 {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      .location p {
+        margin: 0;
+        color: #e0e7ff;
+      }
+
+      .notification {
+        position: relative;
+        cursor: pointer;
+      }
+
+      .notification .bell {
+        font-size: 1.6rem;
+      }
+
+      .badge {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        background: red;
+        color: white;
+        font-size: 0.7rem;
+        font-weight: bold;
+        padding: 2px 6px;
+        border-radius: 50%;
+      }
+
+      .profile {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 5px 10px;
+        border-radius: 20px;
+      }
+
+      .quick-report {
+        padding: 1.5rem;
+        background-color: #fff;
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      canvas,
+      img.preview {
+        width: 320px;
+        height: 240px;
+        border: 2px solid #333;
+        border-radius: 8px;
+        margin: 10px;
+        display: none;
+      }
+
+      button,
+      select {
+        margin: 10px;
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 8px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+      }
+
+      .record-btn {
+        border: none;
+        background: #2563eb;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .record-btn.recording {
+        background: red;
+      }
+
+      nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #222;
+        color: #fff;
+        border-top: 1px solid #e5e7eb;
+        display: flex;
+        justify-content: space-around;
+        padding: 0.5rem 0;
+        font-size: 1.3rem;
+        border-radius: 12px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 99%;
+        margin-left: 5;
+      }
+
+      nav button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1.5rem;
+        color: #ffffff;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid header">
+      <div class="row align-items-center">
+        <!-- Title -->
+        <div class="col-12 col-md-6">
+          <h2>CivicReport</h2>
+          <p>Location appears here...</p>
+        </div>
+
+        <!-- Notification -->
+        <div class="col-6 col-md-3 text-end">
+          <div class="notification d-inline-block me-3">
+            <i class="fas fa-bell bell"></i>
+            <span class="badge">3</span>
+          </div>
+        </div>
+
+        <!-- Profile -->
+        <div class="col-6 col-md-3 text-end">
+          <div class="profile d-inline-flex">
+            <i class="fas fa-user-circle"></i>
+            <span>Profile</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% if messages %} {% for message in messages %}
+    <h2>{{ message }}</h2>
+    {% endfor %}
+
+    <script>
+      // Redirect after 3 seconds (3000ms)
+      {% for message in messages %}
+          {% if message.tags == 'success' %}
+              setTimeout(function() {
+                  window.location.href = "{% url 'home' %}";
+              }, 2000);
+          {% else %}
+              etTimeout(function() {
+                  window.location.href = "{% url 'report_complaint' %}";
+              }, 2000);
+          {% endif %}
+      {% endfor %}
+    </script>
+    {% endif %}
+
+    <div class="container-fluid mt-4" style="padding-bottom: 200px">
+      <div class="quick-report">
+        <h4 class="text-center mb-3">
+          <i class="fas fa-clipboard me-2"></i>Report the Issue
+        </h4>
+        <form
+          onsubmit="window.alert('Complaint submitted successfully!!')"
+          method="POST"
+          action="{% url 'report_complaint' %}"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+
+          <!-- Image Upload -->
+          <div class="mb-3">
+            <!-- Option selector -->
+            <select id="photoOption" class="form-select">
+              <option value="">-- Select Option --</option>
+              <option value="upload">Upload from Device</option>
+              <option value="capture">Capture Live Photo</option>
+            </select>
+            <!-- Upload input -->
+            <input
+              type="file"
+              name="image"
+              id="uploadInput"
+              accept="image/*"
+              style="display: none"
+            />
+
+            <!-- Direct capture input (for mobile camera) -->
+            <input
+              type="file"
+              id="cameraInput"
+              name="image"
+              accept="image/*"
+              capture="environment"
+              style="display: none"
+            />
+
+            <!-- Preview -->
+            <img id="preview" class="preview" alt="Preview" />
+            <!-- Department Message -->
+            <p
+              id="issueMessage"
+              style="
+                display: none;
+                font-weight: bold;
+                color: #2563eb;
+                margin-top: 10px;
+              "
+            ></p>
+          </div>
+          <br />
+
+          <!-- Preview -->
+          <img id="Preview" class="preview" alt="Preview" />
+          <br />
+
+          <!-- Text Input -->
+          <div class="mb-3">
+            <label class="form-label"
+              ><i class="fas fa-pen me-2"></i> Add Description</label
+            >
+            <textarea
+              class="form-control"
+              name="description"
+              rows="3"
+              placeholder="Describe the issue..."
+            ></textarea>
+          </div>
+          <br />
+
+          <!-- Voice Recording -->
+          <div class="mb-3">
+            <label class="form-label"
+              ><i class="fas fa-microphone me-2"></i> Record Voice</label
+            ><br />
+            <button type="button" id="recordBtn" class="record-btn">
+              <i class="fas fa-microphone"></i> Start Recording
+            </button>
+            <audio id="audioPlayback" controls class="mt-2 d-none"></audio>
+          </div>
+          <br />
+          <input type="hidden" id="latitude" name="latitude" />
+          <input type="hidden" id="longitude" name="longitude" />
+
+          <!-- Submit -->
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-paper-plane me-2"></i> Submit Report
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      // Get user location when page loads
+      navigator.geolocation.getCurrentPosition(function (position) {
+        document.getElementById("latitude").value = position.coords.latitude;
+        document.getElementById("longitude").value = position.coords.longitude;
+      });
+    </script>
+
+    <nav>
+      <button onclick="location.href='{% url 'home' %}'">
+        <i class="fas fa-home me-2"></i>
+        Home
+      </button>
+      <button onclick="location.href='{% url 'civilian_track' %}'">
+        <i class="fas fa-route me-2"></i>
+
+        Track
+      </button>
+      <button>
+        <i class="fas fa-map me-2"></i>
+        Map
+      </button>
+    </nav>
+    <script>
+      const photoOption = document.getElementById("photoOption");
+      const uploadInput = document.getElementById("uploadInput");
+      const cameraInput = document.getElementById("cameraInput");
+      const preview = document.getElementById("preview");
+
+      // Handle dropdown change
+      photoOption.addEventListener("change", (e) => {
+        if (e.target.value === "upload") {
+          uploadInput.style.display = "block";
+          cameraInput.style.display = "none";
+          preview.style.display = "none";
+        } else if (e.target.value === "capture") {
+          uploadInput.style.display = "none";
+          cameraInput.style.display = "block";
+          preview.style.display = "none";
+        } else {
+          uploadInput.style.display = "none";
+          cameraInput.style.display = "none";
+          preview.style.display = "none";
+        }
+      });
+
+      // Show preview after selecting/capturing
+      function showPreview(input) {
+        const file = input.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            preview.src = e.target.result;
+            preview.style.display = "block";
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+
+      uploadInput.addEventListener("change", () => showPreview(uploadInput));
+      cameraInput.addEventListener("change", () => showPreview(cameraInput));
+
+      function classifyIssue(fileName) {
+        let message = "⚠️ Unable to recognize the issue.";
+        if (fileName.toLowerCase().includes("drainage")) {
+          message =
+            "✅ Issue recognized: Drainage problem → Sent to Sanitation Department.";
+        } else if (fileName.toLowerCase().includes("road")) {
+          message =
+            "✅ Issue recognized: Road damage → Sent to Public Works Department.";
+        } else if (fileName.toLowerCase().includes("streetlight")) {
+          message =
+            "✅ Issue recognized: Drainage problem → Sent to Electrical Department.";
+        }
+        const msgEl = document.getElementById("issueMessage");
+        msgEl.textContent = message;
+        msgEl.style.display = "block"; // 👈 make sure it's visible
+      }
+      // Show preview after selecting/capturing
+      function showPreview(input) {
+        const file = input.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            preview.src = e.target.result;
+            preview.style.display = "block";
+            classifyIssue(file.name); // classify based on file name
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+    </script>
+  </body>
+</html>
