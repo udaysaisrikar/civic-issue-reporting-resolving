@@ -245,6 +245,9 @@
 
                         <!-- Preview -->
                         <img id="preview" class="preview" alt="Preview">
+                        <!-- Department Message -->
+                        <p id="issueMessage" style="display:none; font-weight:bold; color:#2563eb; margin-top:10px;"></p>
+
                     </div>
                     <br>
 
@@ -294,7 +297,8 @@
                 Map
             </button>
         </a> 
-        </nav>
+            
+    </nav>
       <script>
         const photoOption = document.getElementById('photoOption');
         const uploadInput = document.getElementById('uploadInput');
@@ -357,7 +361,7 @@
                                 mimeType = 'audio/webm';
                             } else {
                                 mimeType = '';
-                            }
+                            }   
                             mediaRecorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
                             audioChunks = [];
                             mediaRecorder.ondataavailable = (e) => {
@@ -403,6 +407,37 @@
                     stopRecording();
                 }
             });
+
+
+            function classifyIssue(fileName) {
+    let message = "⚠️ Unable to recognize the issue.";
+    if (fileName.toLowerCase().includes("drainage")) {
+        message = "✅ Issue recognized: Drainage problem → Sent to Sanitation Department.";
+    } else if (fileName.toLowerCase().includes("road")) {
+        message = "✅ Issue recognized: Road damage → Sent to Public Works Department.";
+    }
+    else if (fileName.toLowerCase().includes("streetlight")) {
+        message = "✅ Issue recognized: Drainage problem → Sent to Electrical Department.";
+    }
+    const msgEl = document.getElementById("issueMessage");
+    msgEl.textContent = message;
+    msgEl.style.display = "block";  // 👈 make sure it's visible
+}
+
+
+// Show preview after selecting/capturing
+function showPreview(input) {
+    const file = input.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            preview.src = e.target.result;
+            preview.style.display = "block";
+            classifyIssue(file.name); // classify based on file name
+        };
+        reader.readAsDataURL(file);
+    }
+}
   </script>
     </body>
 </html>
