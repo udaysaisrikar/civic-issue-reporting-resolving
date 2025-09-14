@@ -1,185 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ResolveIt - Civic Issue Reporting</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resolvelt</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
     body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      background: linear-gradient(135deg, #f0f7ff, #e8f5f1); /* soft gradient */
+      background-attachment: fixed;
+      animation: backgroundMove 15s ease infinite alternate;
     }
-
-    header {
-      background-color: #222;
-      color: white;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    /* Navbar */
+    .navbar {
+      background-color: #1a1a1a;
+      padding: 0.75rem 1rem;
+      animation: slideDown 1s ease;
     }
-
-    header .logo {
-      font-size: 1.5rem;
+    .navbar-brand {
       font-weight: bold;
+      color: white !important;
+      font-size: 1.3rem;
     }
-
-    header nav {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
+    .btn-signin {
+      background: #0066cc;
+      color: #fff;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: transform 0.2s, background 0.3s;
     }
-
-    header nav a {
-      color: white;
-      text-decoration: none;
-      transition: 0.3s;
+    .btn-signin:hover {
+      background: #004c99;
+      transform: scale(1.05);
     }
-
-    header nav a:hover {
-      text-decoration: underline;
-    }
-
-    .signin-btn {
-      background-color: #444;
-      border: none;
-      padding: 0.5rem 1rem;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .signin-btn{
-      background-color: skyblue;
-      font-size:1rem;
-    }
-
-    main {
+    /* Hero Section */
+    .hero {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 2rem;
-      background: #fff;
+      padding: 3rem 1rem;
+      animation: fadeIn 2s ease;
     }
-
-    main h1 {
-      font-size: 1.5rem;
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: bold;
       margin-bottom: 1rem;
-      color: #222;
+      opacity: 0;
+      animation: fadeUp 1.5s ease forwards;
     }
-
-    main p {
-      font-size:0.8rem;
-      color: #333;
+    .hero p {
+      font-size: 1rem;
+      max-width: 500px;
+      margin-bottom: 2rem;
+      color: #444;
+      opacity: 0;
+      animation: fadeUp 2s ease forwards;
+      animation-delay: 0.5s;
     }
-
-    .btn-group {
-      margin-top: 1.5rem;
-      display: flex;
-      gap: 1rem;
-    }
-
-    .btn {
+    .hero .btn {
+      margin: 0.5rem;
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: transform 0.2s, background-color 0.3s;
+      border-radius: 8px;
+      transition: transform 0.2s, box-shadow 0.3s;
     }
-
     .btn-primary {
-      background-color: blue;
-      color: white;
+      background: #0066cc;
+      border: none;
     }
-
-    .btn-secondary {
-      background-color: #e0e0e0;
-      color: #222;
-    }
-
-    .btn:hover {
+    .btn-primary:hover {
+      background: #004c99;
       transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
-
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #333;
+      border: none;
+    }
+    .btn-secondary:hover {
+      background: #d1d5db;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    /* Footer */
     footer {
-      background-color: #222;
-      color: white;
+      background-color: #1a1a1a;
+      color: #bbb;
       text-align: center;
-      padding: 1.5rem 1rem;
-    }
-
-    footer nav {
-      margin-bottom: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    footer nav a {
-      color: white;
-      text-decoration: none;
+      padding: 1.2rem 1rem;
       font-size: 0.9rem;
+      animation: slideUp 1.2s ease;
     }
-
-    footer nav a:hover {
+    footer a {
+      color: #bbb;
+      margin: 0 0.75rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    footer a:hover {
       text-decoration: underline;
+      color: #fff;
     }
 
-    footer p {
-      font-size: 0.8rem;
-      color: #ccc;
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes backgroundMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">ResolveIt</div>
-    <nav>
-      <button class="signin-btn">Sign In</button>
-    </nav>
-  </header>
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark d-flex justify-content-between">
+    <a class="navbar-brand" href="#">Resolvelt</a>
+    <a href="signin_signup.html">
+      <button class="btn btn-signin">Sign In</button>
+    </a>
+    
+  </nav>
 
-  <main>
-    <h1>Welcome to ResolveIt</h1>
-    <p>Your platform to report and resolve civic issues effortlessly.</p>
-    <div class="btn-group">
-      <button class="btn btn-primary" onclick="getStarted()">Get Started</button>
-      <button class="btn btn-secondary" onclick="learnMore()">Learn More</button>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to Resolvelt</h1>
+    <p>Your trusted platform to report and resolve civic issues in a simple, transparent, and efficient way.</p>
+    <div>
+      <a href="#" class="btn btn-primary">Get Started</a>
+      <a href="#" class="btn btn-secondary">Learn More</a>
     </div>
-  </main>
+  </section>
 
+  <!-- Footer -->
   <footer>
-    <nav>
-      <a href="#terms">Terms of Service</a>
-      <a href="#privacy">Privacy Policy</a>
-      <a href="#help">Help & Support</a>
-      <a href="#contact">Contact Us</a>
-    </nav>
-    <p>&copy; 2025 ResolveIt. All rights reserved.</p>
+    <div>
+      <a href="#">Terms of Service</a> |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Help & Support</a> |
+      <a href="#">Contact Us</a>
+    </div>
+    <p class="mt-2 mb-0">© 2025 Resolvelt. All rights reserved.</p>
   </footer>
-
-  <script>
-    function getStarted() {
-      alert("Redirecting to sign up page...");
-    }
-
-    function learnMore() {
-      alert("Redirecting to about us page...");
-    }
-  </script>
 </body>
 </html>
