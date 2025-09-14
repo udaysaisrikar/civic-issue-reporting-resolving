@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResolveIt - Civic Issue Reporting</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #222;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    header nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    header nav a {
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    .signin-btn {
+      background-color: #444;
+      border: none;
+      padding: 0.5rem 1rem;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .signin-btn{
+      background-color: skyblue;
+      font-size:1rem;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background: #fff;
+    }
+
+    main h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #222;
+    }
+
+    main p {
+      font-size:0.8rem;
+      color: #333;
+    }
+
+    .btn-group {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.3s;
+    }
+
+    .btn-primary {
+      background-color: blue;
+      color: white;
+    }
+
+    .btn-secondary {
+      background-color: #e0e0e0;
+      color: #222;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    footer nav {
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    footer nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    footer nav a:hover {
+      text-decoration: underline;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">ResolveIt</div>
+    <nav>
+      <button class="signin-btn">Sign In</button>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Welcome to ResolveIt</h1>
+    <p>Your platform to report and resolve civic issues effortlessly.</p>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="getStarted()">Get Started</button>
+      <button class="btn btn-secondary" onclick="learnMore()">Learn More</button>
+    </div>
+  </main>
+
+  <footer>
+    <nav>
+      <a href="#terms">Terms of Service</a>
+      <a href="#privacy">Privacy Policy</a>
+      <a href="#help">Help & Support</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+    <p>&copy; 2025 ResolveIt. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function getStarted() {
+      alert("Redirecting to sign up page...");
+    }
+
+    function learnMore() {
+      alert("Redirecting to about us page...");
+    }
+  </script>
+</body>
+</html>
